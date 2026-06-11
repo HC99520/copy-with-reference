@@ -1,0 +1,40 @@
+<idea-plugin>
+    <id>com.copywithreference</id>
+    <name>Copy With Reference</name>
+    <vendor url="https://github.com">copywithreference</vendor>
+
+    <description><![CDATA[
+        <p>Copy selected code with file path and line numbers to clipboard.</p>
+        <p>Format optimized for pasting to Claude Code / ChatGPT:</p>
+        <pre>@src/main/UserService.java:42-58
+```java
+public User findById(Long id) {
+    return repository.findById(id).orElseThrow(...);
+}
+```</pre>
+        <h3>Features</h3>
+        <ul>
+            <li>Right-click in editor → <b>Copy with File Reference</b></li>
+            <li>Automatically detects selected lines range</li>
+            <li>If no selection, copies the current line</li>
+            <li>Includes language tag in code fence based on file extension</li>
+        </ul>
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <actions>
+        <action
+            id="CopyWithReference.CopyAction"
+            class="com.copywithreference.CopyWithReferenceAction"
+            text="Copy with File Reference"
+            description="Copy selected code with file path and line numbers, formatted for Claude Code / ChatGPT"
+            icon="AllIcons.Actions.Copy">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl meta C"/>
+        </action>
+    </actions>
+</idea-plugin>
